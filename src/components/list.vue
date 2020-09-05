@@ -53,14 +53,19 @@ export default {
     },
     methods: {
         deleteUser(id){
-            this.$http.delete('users/'+id)
-            .then(response => {
-                console.log(response)
-                document.getElementById('user_'+id).remove()
-            }).catch(error => {
-                console.log(error.response)
-                alert('Fail to Delete !')
-            })
+            var r = confirm("You Want to Delete !");
+            if (r == true) {
+                this.$http.delete('users/'+id)
+                .then(response => {
+                    console.log(response)
+                    document.getElementById('user_'+id).remove()
+                }).catch(error => {
+                    console.log(error.response)
+                    alert('Fail to Delete !')
+                })
+            } else {
+                return false
+            }
         }
     },
     computed: {

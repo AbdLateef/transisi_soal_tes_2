@@ -1,44 +1,45 @@
 <template>
   <div id="app">
     <div class="wrapper">
-        <div class="container">
+        <div v-if="loggedIn.status !== 200 && loginStatus == false" class="container">
+          <div class="login" style="padding: 55px 0px">
+            <h1 style="color: #ebebf2">Hi Abdul Lathif</h1>
+            <span style="color: #c8b7d8">Please Login or Sign Up to Continue browsing</span>
+            <form class="form" id="signup">
+              <input type="email" id="email" placeholder="Email" v-model="email" required>
+              <input type="password" id="password" placeholder="Password" v-model="password" required>
+              <button 
+                type="button" 
+                id="login-button" 
+                class="loginbutton"
+                @click="login()"
+              >
+                Login
+              </button>
+              <button 
+                type="button" 
+                id="signup-button" 
+                class="loginbutton" 
+                @click="signUp()"
+              >
+                Sign Up
+              </button>
+            </form>
+            <div v-if="register.status == 200">
+              <span style="color: green">Success Register</span>
+            </div>
+            <div v-else>
+              <span style="color: red">{{ register.message }}</span>
+            </div>
+            <div v-if="loginStatus.status !== 200">
+              <span style="color: red">{{ loggedIn.message }}</span>
+            </div>
+          </div>
+        </div>
+        <div v-else class="container">
             <div class="col-left">
                 <div class="col-left-container">
-                  <h1>Hi Abdul Lathif</h1>
-                    <div v-if="loggedIn.status !== 200 && loginStatus == false" class="login">
-                        <span>Please Login or Sign Up to Continue browsing</span>
-                        <form class="form" id="signup">
-                          <input type="email" id="email" placeholder="Email" v-model="email" required>
-                          <input type="password" id="password" placeholder="Password" v-model="password" required>
-                          <button 
-                            type="button" 
-                            id="login-button" 
-                            class="loginbutton"
-                            @click="login()"
-                          >
-                            Login
-                          </button>
-                          <button 
-                            type="button" 
-                            id="signup-button" 
-                            class="loginbutton" 
-                            @click="signUp()"
-                          >
-                            Sign Up
-                          </button>
-                        </form>
-                        <div v-if="register.status == 200">
-                          <span style="color: green">Success Register</span>
-                        </div>
-                        <div v-else>
-                          <span style="color: red">{{ register.message }}</span>
-                        </div>
-                        <div v-if="loginStatus.status !== 200">
-                          <span style="color: red">{{ loginStatus.message }}</span>
-                        </div>
-                    </div>
-                    <div v-else>
-                    <!-- <div> -->
+                    <div>
                       <Nav/>
                     </div>
                 </div>
@@ -92,6 +93,7 @@ export default {
     login(){
       this.$store.dispatch('login', {email: this.email, password: this.password})
       this.loggedIn = this.$store.getters.login
+      console.log(this.loggedIn)
     },
     logout(){
       this.$store.commit('loginStatus', false)
