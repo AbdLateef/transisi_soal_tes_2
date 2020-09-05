@@ -1,9 +1,10 @@
 <template>
     <div class="login">
         <div class="sidebar">
+            <router-link to="/">Home</router-link>
             <router-link to="/lists">User List</router-link>
             <router-link to="/create">Create User</router-link>
-            <router-link to="/logout">Logout</router-link>
+            <a href="#" @click="logout()">Logout</a>
         </div>
         
         <!-- <div>
@@ -17,3 +18,14 @@
         </div> -->
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        logout(){
+            this.$store.commit('loginStatus', false)
+            location.reload()
+        }
+    },
+}
+</script>

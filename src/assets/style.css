@@ -17,7 +17,7 @@ body{
     border-radius: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .col-left {
@@ -111,7 +111,7 @@ form input:focus {
             transition-duration: 0.25s;
 }
 
-.createbutton {
+.createbutton, .updatebutton {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;

@@ -4,11 +4,9 @@
         <div class="container">
             <div class="col-left">
                 <div class="col-left-container">
-                    <section class="welcome">
-                        <h1>Hi Abdul Lathif</h1>
-                        <p>Welcome back to the victory, we missed You ! Here the basic Vuejs Application</p>
-                    </section>
-                    <!-- <div v-if="loggedIn.status !== 200 && loginStatus == false" class="login">
+                  <h1>Hi Abdul Lathif</h1>
+                    <div v-if="loggedIn.status !== 200 && loginStatus == false" class="login">
+                        <span>Please Login or Sign Up to Continue browsing</span>
                         <form class="form" id="signup">
                           <input type="email" id="email" placeholder="Email" v-model="email" required>
                           <input type="password" id="password" placeholder="Password" v-model="password" required>
@@ -38,14 +36,14 @@
                         <div v-if="loginStatus.status !== 200">
                           <span style="color: red">{{ loginStatus.message }}</span>
                         </div>
-                    </div> -->
-                    <!-- <div v-else> -->
-                    <div>
+                    </div>
+                    <div v-else>
+                    <!-- <div> -->
                       <Nav/>
                     </div>
                 </div>
             </div>
-            <div class="col-right">
+            <div v-if="loggedIn.status == 200 && loginStatus" class="col-right">
                 <div class="col-right-container">
                     <section class="project-detail">
                         <div class="project-detail-heading">
@@ -132,7 +130,4 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
 </style>

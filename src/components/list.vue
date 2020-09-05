@@ -3,7 +3,7 @@
         <div class="heading">
             <h2>Data</h2>
         </div>
-        <div v-for="user in users" :key="user.id" class="items">
+        <div v-for="user in users" :key="user.id" class="items" :id="'user_'+user.id">
             <div class="item left">
                 <div class="email">
                     {{user.email}}
@@ -16,8 +16,9 @@
                 <img :src="user.avatar" />
             </div>
             <div class="item">
-                <a href="">Update</a>
-                <a href="">Delete</a>
+                <router-link :to="'/detail/'+user.id">Detail</router-link> |
+                <router-link :to="'/update/'+user.id">Update</router-link> |
+                <a href="#" @click="deleteUser(user.id)">Delete</a>
             </div>
         </div>
     </div>
@@ -51,7 +52,16 @@ export default {
         })
     },
     methods: {
-        
+        deleteUser(id){
+            this.$http.delete('users/'+id)
+            .then(response => {
+                console.log(response)
+                document.getElementById('user_'+id).remove()
+            }).catch(error => {
+                console.log(error.response)
+                alert('Fail to Delete !')
+            })
+        }
     },
     computed: {
         
